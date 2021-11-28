@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace AssetViewer
+namespace StockViewer
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -21,11 +21,12 @@ namespace AssetViewer
     public partial class MainWindow : Window
     {
         private ContentControl stockUserControl = new StockUserControl();
-        private ContentControl searchUserControl = new SearchUserControl();
+        private ContentControl mainUserControl = new MainUserControl();
 
         public MainWindow()
         {
             InitializeComponent();
+            contentControl.Content = mainUserControl;
             
         }
         private void btnStockCheck_Click(object sender, RoutedEventArgs e)
@@ -35,7 +36,7 @@ namespace AssetViewer
 
         private void btnStockSearch_Click(object sender, RoutedEventArgs e)
         {
-            contentControl.Content = searchUserControl;
+            contentControl.Content = mainUserControl;
         }
 
         private void btnStockHistory_Click(object sender, RoutedEventArgs e)

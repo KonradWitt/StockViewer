@@ -1,6 +1,6 @@
 ﻿namespace StockViewer
 {
-    enum AVMode
+    enum AVFunction
     {
         search,
         quote,

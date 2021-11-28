@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AssetsManager
+namespace StockViewer
 {
     class ValueStamp
     {

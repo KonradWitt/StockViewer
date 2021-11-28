@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 
-namespace AssetsManager.Model
+namespace StockViewer
 {
     public class ValueSpan
     {

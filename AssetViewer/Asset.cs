@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 
-namespace AssetsManager.Model
+namespace StockViewer
 {
     class Asset : INotifyPropertyChanged
     {

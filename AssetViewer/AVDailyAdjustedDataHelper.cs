@@ -1,14 +1,14 @@
 ﻿using System;
 using Microsoft.Data.Analysis;
-using AssetsManager.Model;
 using System.Globalization;
 
-namespace AssetsManager
+
+namespace StockViewer
 {
-    class DataHelper
+    class AVDailyAdjustedDataHelper
     {
         private readonly DataFrame _data;
-        public DataHelper(DataFrame data)
+        public AVDailyAdjustedDataHelper(DataFrame data)
         {
             _data = data;
         }

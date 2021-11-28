@@ -5,14 +5,25 @@ namespace StockViewer
 {
     class CSVHelper
     {
-        DataFrame CSV2DataFrame(string symbol, AVMode avMode)
+        public DataFrame CSV2DataFrame(string symbol, AVFunction avFunction)
         {
             string date = DateTime.Today.ToString("d");
-            string fileName = $"{symbol}_{date}.csv";
+            string fileName = "";
+            switch(avFunction)
+            {
+                case AVFunction.dailyAdjusted:
+                    fileName = $"{symbol}_DailyAdjusted_{date}.csv";
+                    break;
+                case AVFunction.quote:
+                    fileName = $"{symbol}_Quote_{date}.csv";
+                    break;
+                case AVFunction.search:
+                    fileName = $"{symbol}_Search_{date}.csv";
+                    break;
+            }
 
-            DataFrame stockData = DataFrame.LoadCsv(fileName);
-
-            return stockData;
+            DataFrame data = DataFrame.LoadCsv(fileName);
+            return data;
         }
     }
 }
