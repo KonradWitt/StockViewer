@@ -9,20 +9,23 @@ namespace StockViewer
         {
             string date = DateTime.Today.ToString("d");
             string fileName = "";
-            switch(avFunction)
+            DataFrame data = new();
+            switch (avFunction)
             {
                 case AVFunction.dailyAdjusted:
                     fileName = $"{symbol}_DailyAdjusted_{date}.csv";
+                    data = DataFrame.LoadCsv(fileName);
                     break;
                 case AVFunction.quote:
                     fileName = $"{symbol}_Quote_{date}.csv";
+                    Type[] dataTypes = new Type[] { typeof(string), typeof(string), typeof(string), typeof(string), typeof(string), typeof(string), typeof(string), typeof(string), typeof(string), typeof(string) };
+                     data = DataFrame.LoadCsv(fileName, ',', true, null, dataTypes, -1, 10, false, null);
                     break;
                 case AVFunction.search:
                     fileName = $"{symbol}_Search_{date}.csv";
+                    data = DataFrame.LoadCsv(fileName);
                     break;
             }
-
-            DataFrame data = DataFrame.LoadCsv(fileName);
             return data;
         }
     }

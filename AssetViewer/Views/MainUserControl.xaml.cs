@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows.Input;
 
 namespace StockViewer
 {
@@ -13,7 +14,11 @@ namespace StockViewer
 
     public partial class MainUserControl : UserControl, INotifyPropertyChanged
     {
+        private AVHelper avHelper = new("PUP3Q1BNVQYSQ7KW");
+        private CSVHelper csvHelper = new();
         private ObservableCollection<AVSearchResult> _avSearchResults;
+        private AVQuoteResult _avQuoteResult;
+        private string _searchText;
         public ObservableCollection<AVSearchResult> AVSearchResults
         {
             get { return _avSearchResults; }
@@ -27,7 +32,19 @@ namespace StockViewer
             }
         }
 
-        private string _searchText;
+        public AVQuoteResult AVQuoteResult
+        {
+            get { return _avQuoteResult; }
+            set
+            {
+                if (_avQuoteResult != value)
+                {
+                    _avQuoteResult = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
         public string SearchText
         {
             get { return _searchText; }
@@ -41,8 +58,7 @@ namespace StockViewer
             }
         }
 
-        private AVHelper avHelper = new("PUP3Q1BNVQYSQ7KW");
-        private CSVHelper csvHelper = new();
+        
 
         public MainUserControl()
         {
@@ -58,12 +74,21 @@ namespace StockViewer
             AVSearchResults = new ObservableCollection<AVSearchResult>(avSearchDataHelper.GetSearchResults());
         }
 
+        private void SearchResultsDataGridRow_DoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            DataGridRow selectedDataGridRow = (DataGridRow)sender;
+            AVSearchResult selectedSearchResult = (AVSearchResult)selectedDataGridRow.DataContext;
+            avHelper.SaveQuoteCSVFromURL(selectedSearchResult.Symbol);
+            DataFrame dataFrame = csvHelper.CSV2DataFrame(selectedSearchResult.Symbol, AVFunction.quote);
+            AVQuoteDataHelper avQuoteDataHelper = new(dataFrame);
+            AVQuoteResult = avQuoteDataHelper.GetQuoteResult();
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        
     }
 }

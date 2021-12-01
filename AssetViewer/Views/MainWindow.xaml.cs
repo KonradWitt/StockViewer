@@ -26,6 +26,7 @@ namespace StockViewer
         public MainWindow()
         {
             InitializeComponent();
+            this.FontFamily = new FontFamily("Microsoft Sans Serif");
             contentControl.Content = mainUserControl;
             
         }
