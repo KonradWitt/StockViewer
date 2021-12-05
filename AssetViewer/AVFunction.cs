@@ -2,8 +2,8 @@
 {
     enum AVFunction
     {
-        search,
-        quote,
-        dailyAdjusted
+        Search,
+        Quote,
+        DailyAdjusted
     }
 }

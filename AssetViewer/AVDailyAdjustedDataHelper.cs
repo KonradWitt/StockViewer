@@ -29,27 +29,30 @@ namespace StockViewer
             return rowIndex;
         }
 
-        public double GetClosingPrice(DateTime date, double defaultPrice)
+        public ValueSpan GetPriceSpan(double defaultPrice)
         {
-            int rowIndex = GetRowOfDate(_data["timestamp"], date);
-            DataFrameColumn closeColumn = _data["close"];
-            if (rowIndex >= 0)
+            ValueSpan priceSpan = new ValueSpan();
+
+            NumberFormatInfo formatProvider = new NumberFormatInfo();
+            formatProvider.NumberDecimalSeparator = ".";
+            
+            for(int i=0; i<_data.Rows.Count; i++)
             {
-                try 
+                priceSpan.TimeStamps.Add((DateTime)_data["timestamp"][i]);
+                try
                 {
-                    return Convert.ToDouble(closeColumn[rowIndex]);
+                    priceSpan.Values.Add(Convert.ToDouble(_data["close"][i], formatProvider));
                 }
                 catch
                 {
-                    return defaultPrice;
-                }              
+                    priceSpan.Values.Add(defaultPrice);
+                }
             }
-            else 
-            {
-                return defaultPrice;
-            }
+
+            return priceSpan;
         }
 
+        /*
         public ValueSpan GetPriceSpan (DateTime dateStart, DateTime dateEnd, double defaultPrice = -1)
         {
             ValueSpan priceSpan = new ValueSpan();
@@ -75,5 +78,6 @@ namespace StockViewer
 
             return priceSpan;
         }
+        */
     }
 }

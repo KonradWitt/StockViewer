@@ -20,7 +20,6 @@ namespace StockViewer
     /// </summary>
     public partial class MainWindow : Window
     {
-        private ContentControl stockUserControl = new StockUserControl();
         private ContentControl mainUserControl = new MainUserControl();
 
         public MainWindow()
@@ -30,19 +29,14 @@ namespace StockViewer
             contentControl.Content = mainUserControl;
             
         }
-        private void btnStockCheck_Click(object sender, RoutedEventArgs e)
+        private void btnStockCompare_Click(object sender, RoutedEventArgs e)
         {
-            contentControl.Content = stockUserControl;
+            
         }
 
         private void btnStockSearch_Click(object sender, RoutedEventArgs e)
         {
             contentControl.Content = mainUserControl;
-        }
-
-        private void btnStockHistory_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

@@ -12,16 +12,16 @@ namespace StockViewer
             DataFrame data = new();
             switch (avFunction)
             {
-                case AVFunction.dailyAdjusted:
+                case AVFunction.DailyAdjusted:
                     fileName = $"{symbol}_DailyAdjusted_{date}.csv";
                     data = DataFrame.LoadCsv(fileName);
                     break;
-                case AVFunction.quote:
+                case AVFunction.Quote:
                     fileName = $"{symbol}_Quote_{date}.csv";
                     Type[] dataTypes = new Type[] { typeof(string), typeof(string), typeof(string), typeof(string), typeof(string), typeof(string), typeof(string), typeof(string), typeof(string), typeof(string) };
-                     data = DataFrame.LoadCsv(fileName, ',', true, null, dataTypes, -1, 10, false, null);
+                    data = DataFrame.LoadCsv(fileName, ',', true, null, dataTypes, -1, 10, false, null);
                     break;
-                case AVFunction.search:
+                case AVFunction.Search:
                     fileName = $"{symbol}_Search_{date}.csv";
                     data = DataFrame.LoadCsv(fileName);
                     break;

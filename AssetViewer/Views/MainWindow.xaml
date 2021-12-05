@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StockViewer"
         mc:Ignorable="d"
-        Title="MainWindow" Height="550" Width="950" Background="Transparent"
+        Title="Stock Viewer" Height="550" Width="950" Background="Transparent"
         ResizeMode="CanMinimize"
         WindowStartupLocation="CenterScreen"
         FontFamily="Helvetica"
@@ -18,7 +18,7 @@
         <Grid.RowDefinitions>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Border CornerRadius="20" Grid.RowSpan="3" Grid.ColumnSpan="2" Background="#2e3349"/>
+        <Border CornerRadius="20" Grid.RowSpan="3" Grid.ColumnSpan="2" Background="GhostWhite"/>
         <Grid Background="CornflowerBlue">
             <Grid.RowDefinitions>
                 <RowDefinition Height="125"/>
@@ -27,7 +27,7 @@
             </Grid.RowDefinitions>
             <StackPanel>
                 <Label Content="Stock Viewer" FontSize="30" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center"/>
-                <Image Grid.Row="0" Source="/Images/StocksLogo.png" Height="60"/>
+                <Label Content="by Konrad Witt" FontSize="20" Foreground="White" HorizontalAlignment="Center"/>
             </StackPanel>
             <StackPanel Grid.Row="1" Orientation="Vertical" Margin="0,50,0,0">
                 <StackPanel.Resources>
@@ -41,16 +41,10 @@
                         <Label  Content ="Search" FontSize="22" FontWeight="Bold" Foreground="White" Padding="0"/>
                     </StackPanel>
                 </Button>
-                <Button x:Name="btnStockCheck" Background="{x:Null}" BorderThickness="0" Click="btnStockCheck_Click">
+                <Button x:Name="btnStockCompare" Background="{x:Null}" BorderThickness="0" Click="btnStockCompare_Click">
                     <StackPanel Orientation="Horizontal">
                         <Image/>
-                        <Label  Content ="Check" FontSize="22" FontWeight="Bold" Foreground="White" Padding="0"/>
-                    </StackPanel>
-                </Button>
-                <Button x:Name="btnStockHistory" Background="{x:Null}" BorderThickness="0" Click="btnStockHistory_Click">
-                    <StackPanel Orientation="Horizontal">
-                        <Image/>
-                        <Label  Content ="History" FontSize="22" FontWeight="Bold" Foreground="White" Padding="0"/>
+                        <Label  Content ="Compare" FontSize="22" FontWeight="Bold" Foreground="White" Padding="0"/>
                     </StackPanel>
                 </Button>
             </StackPanel>

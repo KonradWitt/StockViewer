@@ -4,35 +4,36 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:StockViewer"
+             xmlns:oxy="http://oxyplot.org/wpf"
              mc:Ignorable="d" 
              d:DesignHeight="550" d:DesignWidth="750" Background="GhostWhite">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="150"/>
+            <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Border BorderBrush="CornflowerBlue" Grid.RowSpan="2" BorderThickness="5" CornerRadius="8" Margin="20,20,20,20">
+        <Border Background="CornflowerBlue" Height="210" VerticalAlignment="Center" CornerRadius="8" Margin="10,10,10,10" Padding="5,5,5,5">
             <Grid Background="CornflowerBlue">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40"/>
                     <RowDefinition Height="40"/>
                     <RowDefinition />
                 </Grid.RowDefinitions>
-                <Label Grid.Row="0" Grid.ColumnSpan="2" Content="Find your stock" FontSize="20" Foreground="White" VerticalAlignment="Center" Margin="10,0,10,0"/>
-                <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="10,0,10,0">
-                    <TextBox Grid.Row="1"  Text="{Binding Path = SearchText, Mode=TwoWay}" FontSize="24" Width="220" Background="#A2BFF4" Foreground="White" VerticalContentAlignment="Center" BorderThickness="0"/>
-                    <Button Grid.Row="1" x:Name="btnSearch" Background="#A2BFF4" BorderThickness="0" Width="85" Click="btnSearch_Click">
+                <Label Grid.Row="0" Grid.ColumnSpan="2" Content="Find stock:" FontSize="20" Foreground="White" VerticalAlignment="Center"/>
+                <DockPanel Grid.Row="1">
+                    <TextBox Grid.Row="1"  Text="{Binding Path = SearchText, Mode=TwoWay}" FontSize="24" Width="240" Background="#A2BFF4" Foreground="White" CaretBrush="White" VerticalContentAlignment="Center" BorderThickness="0"/>
+                    <Button Grid.Row="1" x:Name="btnSearch" Background="#A2BFF4" HorizontalAlignment="Right" BorderThickness="0" Width="95" Click="btnSearch_Click">
                         <StackPanel Orientation="Horizontal">
                             <Image/>
                             <Label  Content ="Search" FontSize="20" FontWeight="Bold" Foreground="White" Padding="0"/>
                         </StackPanel>
                     </Button>
-                </StackPanel>
-                <DataGrid Grid.Row="2" x:Name="SearchResultsDataGrid" ItemsSource="{Binding Path=AVSearchResults, Mode=TwoWay}"  AutoGenerateColumns="False" Background="#A2BFF4" RowBackground="Transparent" HorizontalGridLinesBrush="White" VerticalGridLinesBrush="White" BorderThickness="0" RowHeaderWidth="0" Margin="10,10,10,10" CanUserResizeColumns="False" Foreground="White">
+                </DockPanel>
+                <DataGrid Grid.Row="2" x:Name="SearchResultsDataGrid" ItemsSource="{Binding Path=AVSearchResults, Mode=TwoWay}"  AutoGenerateColumns="False" Background="#A2BFF4" RowBackground="Transparent" HorizontalGridLinesBrush="White" VerticalGridLinesBrush="White" BorderThickness="0" Margin="0,10,0,0" RowHeaderWidth="0" CanUserResizeColumns="False" Foreground="White">
                     <DataGrid.Resources>
                         <Style TargetType="DataGridColumnHeader">
                             <Setter Property="Background" Value="Transparent" />
@@ -57,7 +58,53 @@
                 </DataGrid>
             </Grid>
         </Border>
+        <Border Background="CornflowerBlue" Grid.Column="1" Height="210" VerticalAlignment="Center" CornerRadius="8" Margin="10,10,10,10" Padding="5,5,5,5">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Content="Today's summary:" FontSize="20" Foreground="White" VerticalAlignment="Center"/>
+                <Grid Grid.Row="1" Background="#A2BFF4">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="33*"/>
+                        <ColumnDefinition Width="125*"/>
+                        <ColumnDefinition Width="158*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column ="0" Content="Name: " FontSize="20" Foreground="White" VerticalAlignment="Center" Margin="10,0,10,0" Grid.ColumnSpan="2"/>
+                    <Label Grid.Column ="2"  Content="{Binding Path=SelectedStock.Name}" FontSize="20" Foreground="White" VerticalAlignment="Center" Margin="10,0,10,0"/>
+                    <Label Grid.Row="1" Grid.Column ="0" Content="Symbol: " FontSize="20" Foreground="White" VerticalAlignment="Center" Margin="10,0,10,0" Grid.ColumnSpan="2"/>
+                    <Label Grid.Row="1" Grid.Column ="2" Content="{Binding Path=SelectedStock.Symbol }" FontSize="20" Foreground="White" VerticalAlignment="Center" Margin="10,0,10,0"/>
+                    <Label Grid.Row="2" Grid.Column ="0" Content="Price: " FontSize="20" Foreground="White" VerticalAlignment="Center" Margin="10,0,10,0" Grid.ColumnSpan="2"/>
+                    <Label Grid.Row="2" Grid.Column ="2" Content="{Binding Path=SelectedStock.PriceStr }" FontSize="20" Foreground="White" VerticalAlignment="Center" Margin="10,0,10,0"/>
+                    <Label Grid.Row="3" Grid.Column ="0" Content="Change: " FontSize="20" Foreground="White" VerticalAlignment="Center" Margin="10,0,10,0" Grid.ColumnSpan="2"/>
+                    <Label Grid.Row="3" Grid.Column ="2" Content="{Binding Path=SelectedStock.ChangePercent}" FontSize="20" Foreground="White" VerticalAlignment="Center" Margin="10,0,10,0"/>
+                </Grid>
+            </Grid>
+        </Border>
+        <Border Background="CornflowerBlue" Grid.Row="1" Grid.ColumnSpan="2" Height="210" VerticalAlignment="Center" CornerRadius="8" Margin="10,10,10,10" Padding="5,5,5,5">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Orientation="Horizontal">
+                    <Button  x:Name="btnPlot_1W" Content="1W" FontSize="16" FontWeight="Bold" Foreground="White" Background="#A2BFF4" HorizontalAlignment="Right" BorderThickness="0" Width="50" Margin="0,0,5,10" Click="btnPlot_1W_Click"/>
+                    <Button  x:Name="btnPlot_1M" Content="1M" FontSize="16" FontWeight="Bold" Foreground="White" Background="#A2BFF4" HorizontalAlignment="Right" BorderThickness="0" Width="50" Margin="5,0,5,10" Click="btnPlot_1M_Click"/>
+                    <Button  x:Name="btnPlot_6M" Content="6M" FontSize="16" FontWeight="Bold" Foreground="White" Background="#A2BFF4" HorizontalAlignment="Right" BorderThickness="0" Width="50" Margin="5,0,5,10" Click="btnPlot_6M_Click"/>
+                    <Button  x:Name="btnPlot_1Y" Content="1Y" FontSize="16" FontWeight="Bold" Foreground="White" Background="#A2BFF4" HorizontalAlignment="Right" BorderThickness="0" Width="50" Margin="5,0,5,10" Click="btnPlot_1Y_Click"/>
+                    <Button  x:Name="btnPlot_Max" Content="Max" FontSize="16" FontWeight="Bold" Foreground="White" Background="#A2BFF4" HorizontalAlignment="Right" BorderThickness="0" Width="50" Margin="5,0,5,10" Click="btnPlot_Max_Click"/>
+                </StackPanel>
+                <oxy:PlotView x:Name="Plot_SelectedStock" Model="{Binding PlotModel}" Grid.Row="1" Background="#A2BFF4"/>
+            </Grid>
 
-        <Label Grid.Column="1" FontSize="40" Content="{Binding Path=AVQuoteResult.ChangePercent}"/>
+        </Border>
     </Grid>
 </UserControl>
