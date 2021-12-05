@@ -175,6 +175,7 @@ namespace StockViewer
                 lineserie.Points.Add(new DataPoint(DateTimeAxis.ToDouble(_priceSpan.TimeStamps[i]), _priceSpan.Values[i]));
             }
             lineserie.CanTrackerInterpolatePoints = false;
+            lineserie.Color = OxyColors.CornflowerBlue;
             PlotModel.Series.Add(lineserie);
             updatePlotModelTimeframe(DateTime.Now.AddYears(-1));
             PlotModel.InvalidatePlot(true);
