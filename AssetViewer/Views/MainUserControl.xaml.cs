@@ -157,11 +157,12 @@ namespace StockViewer
 
         private void setupPlotModel()
         {
-            var dateAxis = new DateTimeAxis() { MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot, IntervalLength = 50, StringFormat = "dd.MM.yyyy", Angle = 15, Minimum = DateTimeAxis.ToDouble(DateTime.Now.AddYears(-1)), Maximum = DateTimeAxis.ToDouble(DateTime.Now), Font = "Helvetica", FontWeight = 500, TitleFont = "Helvetica", TitleFontWeight = 500, AxislineColor = OxyColors.White, TextColor = OxyColors.White, ExtraGridlineColor = OxyColors.White, MajorGridlineColor = OxyColors.White, TicklineColor = OxyColors.White, IsPanEnabled = false, IsZoomEnabled = false};
+            var dateAxis = new DateTimeAxis() { MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot, IntervalLength = 50, StringFormat = "dd.MM.yy", Angle = 30, Minimum = DateTimeAxis.ToDouble(DateTime.Now.AddYears(-1)), Maximum = DateTimeAxis.ToDouble(DateTime.Now), Font = "Helvetica", FontWeight = 500, TitleFont = "Helvetica", TitleFontWeight = 500, AxislineColor = OxyColors.White, TextColor = OxyColors.White, ExtraGridlineColor = OxyColors.White, MajorGridlineColor = OxyColors.White, TicklineColor = OxyColors.White, IsPanEnabled = false, IsZoomEnabled = false};
             PlotModel.Axes.Add(dateAxis);
             var valueAxis = new LinearAxis() { Key ="YAxis", MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot, Font = "Helvetica", FontWeight = 500, TitleFont = "Helvetica", TitleFontWeight = 500, TextColor = OxyColors.White, ExtraGridlineColor = OxyColors.White, AxislineColor = OxyColors.White, MajorGridlineColor = OxyColors.White, MinorGridlineColor = OxyColors.White, TicklineColor = OxyColors.White, IsPanEnabled = false, IsZoomEnabled = false };
             PlotModel.Axes.Add(valueAxis);
             PlotModel.PlotAreaBorderColor = OxyColors.White;
+            PlotModel.PlotMargins = new OxyThickness(30,10,30,40);
             PlotModel.Series.Clear();
             PlotModel.InvalidatePlot(true);
         }
@@ -176,6 +177,7 @@ namespace StockViewer
             }
             lineserie.CanTrackerInterpolatePoints = false;
             lineserie.Color = OxyColors.CornflowerBlue;
+            lineserie.StrokeThickness = 5;
             PlotModel.Series.Add(lineserie);
             updatePlotModelTimeframe(DateTime.Now.AddYears(-1));
             PlotModel.InvalidatePlot(true);

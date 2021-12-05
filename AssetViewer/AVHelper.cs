@@ -40,6 +40,7 @@ namespace StockViewer
 
             if (File.Exists($"{Directory.GetCurrentDirectory()}{Path.DirectorySeparatorChar}{fileName}"))
             {
+                return;
                 File.Delete($"{Directory.GetCurrentDirectory()}{Path.DirectorySeparatorChar}{fileName}");
             }
 
