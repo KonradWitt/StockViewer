@@ -1,5 +1,3 @@
-## Project in progress
-
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
